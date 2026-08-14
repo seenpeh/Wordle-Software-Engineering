@@ -1,0 +1,17 @@
+{
+  "name": "persian-wordle",
+  "version": "0.1.0",
+  "description": "بازی وردل فارسی - پیاده‌سازی static frontend با HTML، CSS و JavaScript خالص",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "wordle",
+    "persian",
+    "game",
+    "static-frontend"
+  ],
+  "license": "MIT"
+}
