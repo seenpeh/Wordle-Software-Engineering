@@ -1,6 +1,6 @@
 // وردل فارسی - نقطه‌ی ورود برنامه
 
-import { createBoard } from "./board.js";
+import { startGame } from "./game.js";
 import {
   bindKeyboardFeedback,
   bindPhysicalKeyboard,
@@ -10,7 +10,7 @@ import {
 const board = document.querySelector("#board");
 const keyboard = document.querySelector("#keyboard");
 
-createBoard(board);
+startGame(board);
 
 bindVirtualKeyboard(keyboard);
 bindPhysicalKeyboard();
