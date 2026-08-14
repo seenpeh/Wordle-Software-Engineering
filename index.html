@@ -4,15 +4,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>وردل فارسی</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <h1>وردل فارسی</h1>
   </header>
 
-  <main>
+  <main class="game" aria-label="بازی وردل فارسی">
     <!-- گرید حدس‌ها اینجا قرار می‌گیرد -->
-    <!-- کیبورد مجازی اینجا قرار می‌گیرد -->
+
+    <section class="keyboard" id="keyboard" aria-label="صفحه‌کلید فارسی">
+      <div class="keyboard__row">
+        <button class="keyboard__key" type="button" data-key="ض">ض</button>
+        <button class="keyboard__key" type="button" data-key="ص">ص</button>
+        <button class="keyboard__key" type="button" data-key="ث">ث</button>
+        <button class="keyboard__key" type="button" data-key="ق">ق</button>
+        <button class="keyboard__key" type="button" data-key="ف">ف</button>
+        <button class="keyboard__key" type="button" data-key="غ">غ</button>
+        <button class="keyboard__key" type="button" data-key="ع">ع</button>
+        <button class="keyboard__key" type="button" data-key="ه">ه</button>
+        <button class="keyboard__key" type="button" data-key="خ">خ</button>
+        <button class="keyboard__key" type="button" data-key="ح">ح</button>
+        <button class="keyboard__key" type="button" data-key="ج">ج</button>
+        <button class="keyboard__key" type="button" data-key="چ">چ</button>
+      </div>
+
+      <div class="keyboard__row">
+        <button class="keyboard__key" type="button" data-key="ش">ش</button>
+        <button class="keyboard__key" type="button" data-key="س">س</button>
+        <button class="keyboard__key" type="button" data-key="ی">ی</button>
+        <button class="keyboard__key" type="button" data-key="ب">ب</button>
+        <button class="keyboard__key" type="button" data-key="ل">ل</button>
+        <button class="keyboard__key" type="button" data-key="ا">ا</button>
+        <button class="keyboard__key" type="button" data-key="ت">ت</button>
+        <button class="keyboard__key" type="button" data-key="ن">ن</button>
+        <button class="keyboard__key" type="button" data-key="م">م</button>
+        <button class="keyboard__key" type="button" data-key="ک">ک</button>
+        <button class="keyboard__key" type="button" data-key="گ">گ</button>
+      </div>
+
+      <div class="keyboard__row">
+        <button class="keyboard__key keyboard__key--action" type="button" data-key="enter" aria-label="ثبت حدس">ثبت</button>
+        <button class="keyboard__key" type="button" data-key="ژ">ژ</button>
+        <button class="keyboard__key" type="button" data-key="ظ">ظ</button>
+        <button class="keyboard__key" type="button" data-key="ط">ط</button>
+        <button class="keyboard__key" type="button" data-key="ز">ز</button>
+        <button class="keyboard__key" type="button" data-key="ر">ر</button>
+        <button class="keyboard__key" type="button" data-key="ذ">ذ</button>
+        <button class="keyboard__key" type="button" data-key="د">د</button>
+        <button class="keyboard__key" type="button" data-key="پ">پ</button>
+        <button class="keyboard__key" type="button" data-key="و">و</button>
+        <button class="keyboard__key keyboard__key--action" type="button" data-key="backspace" aria-label="حذف حرف">⌫</button>
+      </div>
+    </section>
   </main>
+
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
