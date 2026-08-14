@@ -1,9 +1,19 @@
 // کنترلر بازی: رویدادهای ورودی را به وضعیت و گرید وصل می‌کند
 
 import { GAME_INPUT_EVENT } from "./input.js";
-import { createBoard, setTileLetter } from "./board.js";
-import { addLetter, createGameState, currentGuess, deleteLetter } from "./state.js";
+import { GUESS_EVALUATED_EVENT } from "./keyboard.js";
+import { createBoard, setTileLetter, setTileState } from "./board.js";
+import {
+  addLetter,
+  commitRow,
+  createGameState,
+  currentGuess,
+  deleteLetter,
+  isGuessComplete,
+} from "./state.js";
 import { WORD_LENGTH } from "./config.js";
+import { evaluateGuess } from "./evaluate.js";
+import { isValidWord, pickRandomWord } from "./words.js";
 
 /**
  * ردیف جاری گرید را با حروف تایپ‌شده هم‌گام می‌کند.
@@ -22,14 +32,46 @@ function renderCurrentRow(tiles, state) {
 }
 
 /**
+ * نتیجه‌ی ارزیابی را روی خانه‌های یک ردیف اعمال می‌کند.
+ */
+function paintRow(rowTiles, evaluations) {
+  evaluations.forEach((entry, index) => {
+    setTileState(rowTiles[index], entry.status);
+  });
+}
+
+/**
  * بازی را روی گرید داده‌شده راه‌اندازی می‌کند.
  * @param {HTMLElement} boardElement
  * @param {Document|HTMLElement} target عنصری که رویدادهای ورودی روی آن منتشر می‌شود
+ * @param {string} [targetWord] کلمه‌ی هدف، در صورت نبود تصادفی انتخاب می‌شود
  * @returns {() => void} تابع پاک‌سازی شنونده‌ها
  */
-export function startGame(boardElement, target = document) {
+export function startGame(boardElement, target = document, targetWord = pickRandomWord()) {
   const tiles = createBoard(boardElement);
   const state = createGameState();
+
+  const submitGuess = () => {
+    if (!isGuessComplete(state)) {
+      return;
+    }
+
+    const guess = currentGuess(state).join("");
+
+    if (!isValidWord(guess)) {
+      return;
+    }
+
+    const evaluations = evaluateGuess(guess, targetWord);
+    paintRow(tiles[state.currentRow], evaluations);
+
+    // کیبورد آرمین به همین رویداد گوش می‌دهد تا حروف استفاده‌شده را رنگ کند.
+    target.dispatchEvent(new CustomEvent(GUESS_EVALUATED_EVENT, {
+      detail: { evaluations },
+    }));
+
+    commitRow(state);
+  };
 
   const handleInput = (event) => {
     const { action, value } = event.detail ?? {};
@@ -39,6 +81,9 @@ export function startGame(boardElement, target = document) {
       changed = addLetter(state, value);
     } else if (action === "delete") {
       changed = deleteLetter(state);
+    } else if (action === "submit") {
+      submitGuess();
+      return;
     }
 
     if (changed) {
