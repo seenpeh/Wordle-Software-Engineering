@@ -14,6 +14,12 @@ test("maps virtual action keys to game actions", () => {
   assert.deepEqual(normalizeGameInput("backspace"), { action: "delete" });
 });
 
+test("accepts physical keyboard action key casing", () => {
+  assert.deepEqual(normalizeGameInput("Enter"), { action: "submit" });
+  assert.deepEqual(normalizeGameInput("Backspace"), { action: "delete" });
+  assert.deepEqual(normalizeGameInput("Delete"), { action: "delete" });
+});
+
 test("ignores keys that are not valid game input", () => {
   assert.equal(normalizeGameInput("A"), null);
   assert.equal(normalizeGameInput("Shift"), null);
