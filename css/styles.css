@@ -1,9 +1,22 @@
 /* وردل فارسی - استایل‌های پایه */
 
+/*
+ * نسخه‌ی Estedad عمداً پین شده است: jsDelivr برچسب @latest را برای مخازن
+ * gh پشتیبانی نمی‌کند و آن آدرس خطای 404 می‌دهد.
+ */
 @font-face {
   font-family: "Estedad";
   src: url("https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@8.5/fonts/Estedad%5Bwght%5D.woff2") format("woff2-variations");
   font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("https://cdn.jsdelivr.net/npm/@fontsource-variable/rubik@latest/files/rubik-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 300 900;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -17,7 +30,7 @@
   --color-present: #c9b458;
   --color-absent: #787c7e;
 
-  --font-family: "Estedad", Tahoma, Arial, sans-serif;
+  --font-family: "Estedad", "Rubik", Tahoma, Arial, sans-serif;
 
   --tile-size: 62px;
   --tile-gap: 5px;
