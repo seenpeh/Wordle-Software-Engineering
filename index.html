@@ -9,6 +9,7 @@
 <body>
   <header class="site-header">
     <h1>وردل فارسی</h1>
+    <button class="icon-button" id="stats-button" type="button" aria-label="نمایش آمار بازی">آمار</button>
   </header>
 
   <main class="game" aria-label="بازی وردل فارسی">
@@ -61,6 +62,34 @@
       </div>
     </section>
   </main>
+
+  <dialog class="stats-modal" id="stats-modal" aria-labelledby="stats-title">
+    <div class="stats-modal__content">
+      <button class="stats-modal__close" type="button" data-close-modal aria-label="بستن پنجره آمار">×</button>
+      <h2 id="stats-title">آمار بازی</h2>
+
+      <dl class="stats-grid" aria-label="خلاصه آمار بازی">
+        <div class="stats-grid__item">
+          <dd data-stat="played">۰</dd>
+          <dt>بازی</dt>
+        </div>
+        <div class="stats-grid__item">
+          <dd data-stat="winRate">۰٪</dd>
+          <dt>درصد برد</dt>
+        </div>
+        <div class="stats-grid__item">
+          <dd data-stat="currentStreak">۰</dd>
+          <dt>برد پیاپی</dt>
+        </div>
+        <div class="stats-grid__item">
+          <dd data-stat="maxStreak">۰</dd>
+          <dt>بیشترین برد</dt>
+        </div>
+      </dl>
+
+      <p class="stats-modal__summary" data-stat="summary">هنوز بازی‌ای ثبت نشده است.</p>
+    </div>
+  </dialog>
 
   <script type="module" src="js/app.js"></script>
 </body>
