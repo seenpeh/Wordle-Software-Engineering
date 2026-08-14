@@ -6,9 +6,17 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Rubik";
+  src: url("https://cdn.jsdelivr.net/npm/@fontsource-variable/rubik@latest/files/rubik-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
-  --font-family: "Estedad", Tahoma, Arial, sans-serif;
+  --font-family: "Estedad", "Rubik", Tahoma, Arial, sans-serif;
   font-family: var(--font-family);
   background: #f7f7f8;
   color: #202124;
