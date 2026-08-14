@@ -1,10 +1,17 @@
 // وردل فارسی - نقطه‌ی ورود برنامه
 
 import { createBoard } from "./board.js";
+import {
+  bindKeyboardFeedback,
+  bindPhysicalKeyboard,
+  bindVirtualKeyboard,
+} from "./keyboard.js";
 
-function init() {
-  const container = document.getElementById("board");
-  createBoard(container);
-}
+const board = document.querySelector("#board");
+const keyboard = document.querySelector("#keyboard");
 
-document.addEventListener("DOMContentLoaded", init);
+createBoard(board);
+
+bindVirtualKeyboard(keyboard);
+bindPhysicalKeyboard();
+bindKeyboardFeedback(keyboard);

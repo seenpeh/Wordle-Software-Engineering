@@ -8,49 +8,63 @@
 }
 
 :root {
-  --color-bg: #ffffff;
-  --color-text: #1a1a1b;
+  color-scheme: light;
+
+  --color-bg: #f7f7f8;
+  --color-text: #202124;
   --color-border: #d3d6da;
   --color-correct: #6aaa64;
   --color-present: #c9b458;
   --color-absent: #787c7e;
 
-  --font-family: "Estedad", Tahoma, sans-serif;
+  --font-family: "Estedad", Tahoma, Arial, sans-serif;
 
   --tile-size: 62px;
   --tile-gap: 5px;
+
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-family);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   min-height: 100vh;
-}
-
-header {
-  border-bottom: 1px solid var(--color-border);
-  padding: 12px 0;
-  width: 100%;
-  text-align: center;
-}
-
-main {
+  margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+button {
+  font: inherit;
+}
+
+.site-header {
+  width: min(100%, 42rem);
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #d8dadd;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
+
+.game {
+  width: min(100%, 42rem);
+  min-height: 0;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
   flex: 1;
-  gap: 24px;
-  padding: 24px 12px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
 /* گرید حدس‌ها */
@@ -59,6 +73,7 @@ main {
   display: grid;
   grid-template-rows: repeat(6, var(--tile-size));
   gap: var(--tile-gap);
+  justify-content: center;
 }
 
 .board-row {
@@ -75,7 +90,6 @@ main {
   font-size: 2rem;
   font-weight: 700;
   line-height: 1;
-  text-transform: none;
   user-select: none;
 }
 
@@ -99,4 +113,68 @@ main {
   background-color: var(--color-correct);
   border-color: var(--color-correct);
   color: #ffffff;
+}
+
+/* کیبورد مجازی */
+
+.keyboard {
+  direction: rtl;
+  display: grid;
+  gap: 0.45rem;
+  user-select: none;
+}
+
+.keyboard__row {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.keyboard__key {
+  min-width: 0;
+  height: 3.5rem;
+  padding: 0 0.35rem;
+  flex: 1 1 0;
+  border: 0;
+  border-radius: 0.35rem;
+  background: #d3d6da;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 120ms ease, transform 80ms ease;
+}
+
+.keyboard__key:hover {
+  background: #c2c6ca;
+}
+
+.keyboard__key:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.keyboard__key:active {
+  transform: scale(0.94);
+}
+
+.keyboard__key--action {
+  flex-grow: 1.45;
+  font-size: 0.9rem;
+}
+
+.keyboard__key[data-state="correct"] {
+  background: var(--color-correct);
+  color: #fff;
+}
+
+.keyboard__key[data-state="present"] {
+  background: var(--color-present);
+  color: #fff;
+}
+
+.keyboard__key[data-state="absent"] {
+  background: var(--color-absent);
+  color: #fff;
 }
