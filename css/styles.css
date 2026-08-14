@@ -11,9 +11,11 @@
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 button {
@@ -61,7 +63,7 @@ button {
   width: min(100%, 42rem);
   min-height: 0;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1rem max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -197,4 +199,66 @@ button {
 .stats-modal__summary {
   margin: 1.5rem 0 0;
   color: #4b5563;
+}
+
+@media (max-width: 40rem) {
+  .site-header {
+    padding: 0.8rem 3.75rem;
+  }
+
+  .icon-button {
+    inset-inline-end: max(0.5rem, env(safe-area-inset-right));
+    padding: 0.4rem 0.55rem;
+    font-size: 0.85rem;
+  }
+
+  .game {
+    padding-block-start: 0.75rem;
+  }
+
+  .keyboard {
+    gap: 0.35rem;
+  }
+
+  .keyboard__row {
+    gap: 0.2rem;
+  }
+
+  .keyboard__key {
+    height: 3.25rem;
+    padding-inline: 0.15rem;
+    font-size: clamp(0.78rem, 3.6vw, 1rem);
+  }
+
+  .keyboard__key--action {
+    flex-grow: 1.6;
+    font-size: clamp(0.68rem, 3vw, 0.82rem);
+  }
+
+  .stats-modal__content {
+    padding: 1.25rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 0.75rem;
+  }
+}
+
+@media (max-height: 42rem) {
+  .site-header {
+    padding-block: 0.55rem;
+  }
+
+  .site-header h1 {
+    font-size: 1.35rem;
+  }
+
+  .game {
+    padding-block-start: 0.5rem;
+  }
+
+  .keyboard__key {
+    height: 2.8rem;
+  }
 }
