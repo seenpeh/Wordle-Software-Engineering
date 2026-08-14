@@ -1,6 +1,15 @@
+@font-face {
+  font-family: "Estedad";
+  src: url("https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@latest/fonts/Estedad[wght].woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
-  font-family: "Rubik", "Estedad", Tahoma, Arial, sans-serif;
+  --font-family: "Estedad", Tahoma, Arial, sans-serif;
+  font-family: var(--font-family);
   background: #f7f7f8;
   color: #202124;
 }
