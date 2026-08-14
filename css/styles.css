@@ -90,3 +90,18 @@ button {
   flex-grow: 1.45;
   font-size: 0.9rem;
 }
+
+.keyboard__key[data-state="correct"] {
+  background: #538d4e;
+  color: #fff;
+}
+
+.keyboard__key[data-state="present"] {
+  background: #b59f3b;
+  color: #fff;
+}
+
+.keyboard__key[data-state="absent"] {
+  background: #787c7e;
+  color: #fff;
+}
