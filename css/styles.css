@@ -1,5 +1,12 @@
 /* وردل فارسی - استایل‌های پایه */
 
+@font-face {
+  font-family: "Estedad";
+  src: url("https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@8.5/fonts/Estedad%5Bwght%5D.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
   --color-bg: #ffffff;
   --color-text: #1a1a1b;
@@ -8,7 +15,7 @@
   --color-present: #c9b458;
   --color-absent: #787c7e;
 
-  --font-family: Tahoma, "Vazirmatn", sans-serif;
+  --font-family: "Estedad", Tahoma, sans-serif;
 
   --tile-size: 62px;
   --tile-gap: 5px;
