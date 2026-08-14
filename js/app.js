@@ -1,9 +1,10 @@
 // وردل فارسی - نقطه‌ی ورود برنامه
 
-import { WORD_LENGTH, MAX_GUESSES } from "./config.js";
+import { createBoard } from "./board.js";
 
 function init() {
-  console.log(`وردل فارسی: ${WORD_LENGTH} حرف، ${MAX_GUESSES} حدس`);
+  const container = document.getElementById("board");
+  createBoard(container);
 }
 
 document.addEventListener("DOMContentLoaded", init);
