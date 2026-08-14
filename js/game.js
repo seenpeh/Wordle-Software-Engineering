@@ -9,11 +9,15 @@ import {
   createGameState,
   currentGuess,
   deleteLetter,
+  isBoardFull,
   isGuessComplete,
 } from "./state.js";
 import { WORD_LENGTH } from "./config.js";
-import { evaluateGuess } from "./evaluate.js";
+import { evaluateGuess, isWinningEvaluation } from "./evaluate.js";
 import { isValidWord, pickRandomWord } from "./words.js";
+
+// همان رویدادی که ماژول آمار برای ثبت نتیجه به آن گوش می‌دهد.
+export const GAME_ENDED_EVENT = "wordle:game-ended";
 
 /**
  * ردیف جاری گرید را با حروف تایپ‌شده هم‌گام می‌کند.
@@ -50,6 +54,23 @@ function paintRow(rowTiles, evaluations) {
 export function startGame(boardElement, target = document, targetWord = pickRandomWord()) {
   const tiles = createBoard(boardElement);
   const state = createGameState();
+  const message = document.querySelector("#message");
+
+  const announce = (text) => {
+    if (message) {
+      message.textContent = text;
+    }
+  };
+
+  const endGame = (won) => {
+    state.status = won ? "won" : "lost";
+    announce(won ? "آفرین! درست حدس زدی." : `فرصت‌ها تمام شد. کلمه «${targetWord}» بود.`);
+
+    // ماژول آمار به این رویداد گوش می‌دهد تا برد/باخت و streak را ذخیره کند.
+    target.dispatchEvent(new CustomEvent(GAME_ENDED_EVENT, {
+      detail: { won, targetWord },
+    }));
+  };
 
   const submitGuess = () => {
     if (!isGuessComplete(state)) {
@@ -59,8 +80,11 @@ export function startGame(boardElement, target = document, targetWord = pickRand
     const guess = currentGuess(state).join("");
 
     if (!isValidWord(guess)) {
+      announce("این کلمه در فهرست کلمات نیست.");
       return;
     }
+
+    announce("");
 
     const evaluations = evaluateGuess(guess, targetWord);
     paintRow(tiles[state.currentRow], evaluations);
@@ -71,6 +95,12 @@ export function startGame(boardElement, target = document, targetWord = pickRand
     }));
 
     commitRow(state);
+
+    if (isWinningEvaluation(evaluations)) {
+      endGame(true);
+    } else if (isBoardFull(state)) {
+      endGame(false);
+    }
   };
 
   const handleInput = (event) => {
