@@ -72,6 +72,19 @@ export function startGame(boardElement, target = document, targetWord = pickRand
     }));
   };
 
+  /**
+   * حدس را ارزیابی می‌کند و نتیجه را برای رنگ‌آمیزی کیبورد منتشر می‌کند.
+   */
+  const checkGuess = (guess) => {
+    const evaluations = evaluateGuess(guess, targetWord);
+
+    target.dispatchEvent(new CustomEvent(GUESS_EVALUATED_EVENT, {
+      detail: { evaluations },
+    }));
+
+    return evaluations;
+  };
+
   const submitGuess = () => {
     if (!isGuessComplete(state)) {
       return;
@@ -86,13 +99,8 @@ export function startGame(boardElement, target = document, targetWord = pickRand
 
     announce("");
 
-    const evaluations = evaluateGuess(guess, targetWord);
+    const evaluations = checkGuess(guess);
     paintRow(tiles[state.currentRow], evaluations);
-
-    // کیبورد آرمین به همین رویداد گوش می‌دهد تا حروف استفاده‌شده را رنگ کند.
-    target.dispatchEvent(new CustomEvent(GUESS_EVALUATED_EVENT, {
-      detail: { evaluations },
-    }));
 
     commitRow(state);
 
