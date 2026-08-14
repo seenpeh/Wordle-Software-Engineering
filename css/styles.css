@@ -24,6 +24,7 @@ button {
   width: min(100%, 42rem);
   margin: 0 auto;
   padding: 1rem;
+  position: relative;
   text-align: center;
   border-bottom: 1px solid #d8dadd;
 }
@@ -31,6 +32,29 @@ button {
 .site-header h1 {
   margin: 0;
   font-size: clamp(1.5rem, 5vw, 2rem);
+}
+
+.icon-button {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 1rem;
+  padding: 0.45rem 0.65rem;
+  translate: 0 -50%;
+  border: 1px solid #b7bbc0;
+  border-radius: 0.4rem;
+  background: #fff;
+  color: inherit;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background: #eceff1;
+}
+
+.icon-button:focus-visible,
+.stats-modal__close:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
 }
 
 .game {
@@ -104,4 +128,73 @@ button {
 .keyboard__key[data-state="absent"] {
   background: #787c7e;
   color: #fff;
+}
+
+.stats-modal {
+  width: min(calc(100% - 2rem), 30rem);
+  padding: 0;
+  border: 0;
+  border-radius: 0.75rem;
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 24%);
+}
+
+.stats-modal::backdrop {
+  background: rgb(0 0 0 / 55%);
+}
+
+.stats-modal__content {
+  padding: 1.5rem;
+  position: relative;
+  text-align: center;
+}
+
+.stats-modal__content h2 {
+  margin: 0 0 1.5rem;
+}
+
+.stats-modal__close {
+  width: 2.25rem;
+  height: 2.25rem;
+  position: absolute;
+  inset-block-start: 0.75rem;
+  inset-inline-end: 0.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #4b5563;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.stats-modal__close:hover {
+  background: #eceff1;
+}
+
+.stats-grid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.stats-grid__item {
+  min-width: 0;
+}
+
+.stats-grid dd {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.stats-grid dt {
+  margin-top: 0.35rem;
+  color: #5f6368;
+  font-size: 0.78rem;
+}
+
+.stats-modal__summary {
+  margin: 1.5rem 0 0;
+  color: #4b5563;
 }
