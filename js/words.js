@@ -1,59 +1,30 @@
-// دیکشنری کلمات پنج‌حرفی فارسی
+// دسترسی به دیکشنری کلمات فارسی
 
 import { WORD_LENGTH } from "./config.js";
+import { ANSWERS, VALID_WORDS } from "./dictionary.js";
+
+/** کلمات هدف بازی. */
+export const WORDS = ANSWERS;
+
+// جست‌وجوی حدس در هر نوبت انجام می‌شود، پس یک Set به‌جای پیمایش آرایه.
+const VALID_LOOKUP = new Set(VALID_WORDS);
 
 /**
- * کلمات هدف بازی. همه‌ی کلمات دقیقاً پنج حرف دارند و فقط از حروفی
- * ساخته شده‌اند که روی کیبورد مجازی وجود دارد (بنابراین «آ» در این
- * فهرست نمی‌آید و به‌جای آن از «ا» استفاده می‌شود).
- */
-export const WORDS = [
-  "پرنده",
-  "ستاره",
-  "مدرسه",
-  "باران",
-  "زندگی",
-  "پنجره",
-  "دریچه",
-  "سلامت",
-  "کبوتر",
-  "گنجشک",
-  "نارنج",
-  "شکلات",
-  "فرهنگ",
-  "پرواز",
-  "تصویر",
-  "کلمات",
-  "بادام",
-  "انگور",
-  "شیرین",
-  "ترانه",
-  "صندلی",
-  "پاییز",
-  "دلتنگ",
-  "خندان",
-  "سپیده",
-  "فرشته",
-  "بلندی",
-  "پرستو",
-];
-
-/**
- * آیا کلمه در فهرست کلمات مجاز هست؟
+ * آیا کلمه به‌عنوان حدس پذیرفته می‌شود؟
  * @param {string} word
  * @returns {boolean}
  */
 export function isValidWord(word) {
-  return WORDS.includes(word);
+  return VALID_LOOKUP.has(word);
 }
 
 /**
- * یک کلمه‌ی تصادفی از فهرست انتخاب می‌کند.
+ * یک کلمه‌ی هدف تصادفی انتخاب می‌کند.
  * @param {() => number} random تابع تصادفی، برای تست‌پذیری قابل جایگزینی است
  * @returns {string}
  */
 export function pickRandomWord(random = Math.random) {
-  return WORDS[Math.floor(random() * WORDS.length)];
+  return ANSWERS[Math.floor(random() * ANSWERS.length)];
 }
 
 /**
@@ -66,9 +37,9 @@ export function toLetters(word) {
 }
 
 /**
- * بررسی سلامت فهرست: همه‌ی کلمات باید طول درست داشته باشند.
+ * بررسی سلامت دیکشنری: همه‌ی کلمات باید طول درست داشته باشند.
  * @returns {string[]} کلمات نامعتبر
  */
 export function findMalformedWords() {
-  return WORDS.filter((word) => toLetters(word).length !== WORD_LENGTH);
+  return VALID_WORDS.filter((word) => toLetters(word).length !== WORD_LENGTH);
 }
