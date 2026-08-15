@@ -1,0 +1,358 @@
+/* وردل فارسی - استایل‌های پایه */
+
+/*
+ * نسخه‌ی Estedad عمداً پین شده است: jsDelivr برچسب @latest را برای مخازن
+ * gh پشتیبانی نمی‌کند و آن آدرس خطای 404 می‌دهد.
+ */
+@font-face {
+  font-family: "Estedad";
+  src: url("https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@8.5/fonts/Estedad%5Bwght%5D.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("https://cdn.jsdelivr.net/npm/@fontsource-variable/rubik@latest/files/rubik-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+
+  --color-bg: #f7f7f8;
+  --color-text: #202124;
+  --color-border: #d3d6da;
+  --color-correct: #6aaa64;
+  --color-present: #c9b458;
+  --color-absent: #787c7e;
+
+  --font-family: "Estedad", "Rubik", Tahoma, Arial, sans-serif;
+
+  --tile-size: 62px;
+  --tile-gap: 5px;
+
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+.site-header {
+  width: min(100%, 42rem);
+  margin: 0 auto;
+  padding: 1rem;
+  position: relative;
+  text-align: center;
+  border-bottom: 1px solid #d8dadd;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
+
+.icon-button {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 1rem;
+  padding: 0.45rem 0.65rem;
+  translate: 0 -50%;
+  border: 1px solid #b7bbc0;
+  border-radius: 0.4rem;
+  background: #fff;
+  color: inherit;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background: #eceff1;
+}
+
+.icon-button:focus-visible,
+.stats-modal__close:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.game {
+  width: min(100%, 42rem);
+  min-height: 0;
+  margin: 0 auto;
+  padding: 1rem max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* گرید حدس‌ها */
+
+.board {
+  display: grid;
+  grid-template-rows: repeat(6, var(--tile-size));
+  gap: var(--tile-gap);
+  justify-content: center;
+}
+
+.board-row {
+  display: grid;
+  grid-template-columns: repeat(5, var(--tile-size));
+  gap: var(--tile-gap);
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-border);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  user-select: none;
+}
+
+.tile.filled {
+  border-color: var(--color-absent);
+}
+
+.tile[data-state="absent"] {
+  background-color: var(--color-absent);
+  border-color: var(--color-absent);
+  color: #ffffff;
+}
+
+.tile[data-state="present"] {
+  background-color: var(--color-present);
+  border-color: var(--color-present);
+  color: #ffffff;
+}
+
+.tile[data-state="correct"] {
+  background-color: var(--color-correct);
+  border-color: var(--color-correct);
+  color: #ffffff;
+}
+
+.message {
+  min-height: 1.5rem;
+  margin: 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+/* کیبورد مجازی */
+
+.keyboard {
+  direction: rtl;
+  display: grid;
+  gap: 0.45rem;
+  user-select: none;
+}
+
+.keyboard__row {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.keyboard__key {
+  min-width: 0;
+  height: 3.5rem;
+  padding: 0 0.35rem;
+  flex: 1 1 0;
+  border: 0;
+  border-radius: 0.35rem;
+  background: #d3d6da;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 120ms ease, transform 80ms ease;
+}
+
+.keyboard__key:hover {
+  background: #c2c6ca;
+}
+
+.keyboard__key:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.keyboard__key:active {
+  transform: scale(0.94);
+}
+
+.keyboard__key--action {
+  flex-grow: 1.45;
+  font-size: 0.9rem;
+}
+
+.keyboard__key[data-state="correct"] {
+  background: var(--color-correct);
+  color: #fff;
+}
+
+.keyboard__key[data-state="present"] {
+  background: var(--color-present);
+  color: #fff;
+}
+
+.keyboard__key[data-state="absent"] {
+  background: var(--color-absent);
+  color: #fff;
+}
+
+.stats-modal {
+  width: min(calc(100% - 2rem), 30rem);
+  padding: 0;
+  border: 0;
+  border-radius: 0.75rem;
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 24%);
+}
+
+.stats-modal::backdrop {
+  background: rgb(0 0 0 / 55%);
+}
+
+.stats-modal__content {
+  padding: 1.5rem;
+  position: relative;
+  text-align: center;
+}
+
+.stats-modal__content h2 {
+  margin: 0 0 1.5rem;
+}
+
+.stats-modal__close {
+  width: 2.25rem;
+  height: 2.25rem;
+  position: absolute;
+  inset-block-start: 0.75rem;
+  inset-inline-end: 0.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #4b5563;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.stats-modal__close:hover {
+  background: #eceff1;
+}
+
+.stats-grid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.stats-grid__item {
+  min-width: 0;
+}
+
+.stats-grid dd {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.stats-grid dt {
+  margin-top: 0.35rem;
+  color: #5f6368;
+  font-size: 0.78rem;
+}
+
+.stats-modal__summary {
+  margin: 1.5rem 0 0;
+  color: #4b5563;
+}
+
+@media (max-width: 40rem) {
+  .site-header {
+    padding: 0.8rem 3.75rem;
+  }
+
+  .icon-button {
+    inset-inline-end: max(0.5rem, env(safe-area-inset-right));
+    padding: 0.4rem 0.55rem;
+    font-size: 0.85rem;
+  }
+
+  .game {
+    padding-block-start: 0.75rem;
+  }
+
+  .keyboard {
+    gap: 0.35rem;
+  }
+
+  .keyboard__row {
+    gap: 0.2rem;
+  }
+
+  .keyboard__key {
+    height: 3.25rem;
+    padding-inline: 0.15rem;
+    font-size: clamp(0.78rem, 3.6vw, 1rem);
+  }
+
+  .keyboard__key--action {
+    flex-grow: 1.6;
+    font-size: clamp(0.68rem, 3vw, 0.82rem);
+  }
+
+  .stats-modal__content {
+    padding: 1.25rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 0.75rem;
+  }
+}
+
+@media (max-height: 42rem) {
+  .site-header {
+    padding-block: 0.55rem;
+  }
+
+  .site-header h1 {
+    font-size: 1.35rem;
+  }
+
+  .game {
+    padding-block-start: 0.5rem;
+  }
+
+  .keyboard__key {
+    height: 2.8rem;
+  }
+}
